@@ -1,1 +1,7 @@
-
+.env
+creddata.jsonl
+dataset.jsonl
+samples/
+*.log
+__pycache__/
+*.pyc
