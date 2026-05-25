@@ -1,0 +1,49 @@
+# Внешняя база правил в формате Secrets Patterns DB (mazen160/secrets-patterns-db).
+# Подхватывается scanner.py автоматически через load_rules_from_yaml().
+# confidence: high  -> strict, без allowlist/entropy
+# confidence: low   -> entropy-гейт (>=3.5) + allowlist (как в gitleaks)
+#
+# Это ДЕМО-набор контекстных правил. Чтобы получить сотни сигнатур —
+# скачать db/rules-stable.yml из репозитория secrets-patterns-db и положить сюда.
+
+patterns:
+  - pattern:
+      name: Datadog API Key
+      regex: '(?i)(?:datadog|dd[_-]?api).{0,40}\b([a-f0-9]{32})\b'
+      confidence: low
+  - pattern:
+      name: Heroku API Key
+      regex: '(?i)(?:heroku).{0,40}\b([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\b'
+      confidence: low
+  - pattern:
+      name: CircleCI Token
+      regex: '(?i)(?:circle).{0,40}\b([a-f0-9]{40})\b'
+      confidence: low
+  - pattern:
+      name: DigitalOcean Token
+      regex: '\b(dop_v1_[a-f0-9]{64})\b'
+      confidence: high
+  - pattern:
+      name: Atlassian API Token
+      regex: '\b(ATATT3[A-Za-z0-9_\-=]{20,})\b'
+      confidence: high
+  - pattern:
+      name: Cloudflare API Token
+      regex: '\b(v1\.0-[A-Za-z0-9_\-]{40,})\b'
+      confidence: low
+  - pattern:
+      name: HashiCorp Vault Token
+      regex: '\b(hvs\.[A-Za-z0-9_\-]{24,})\b'
+      confidence: high
+  - pattern:
+      name: Grafana Service Account Token
+      regex: '\b(glsa_[A-Za-z0-9]{32}_[a-f0-9]{8})\b'
+      confidence: high
+  - pattern:
+      name: Databricks PAT
+      regex: '\b(dapi[a-f0-9]{32})\b'
+      confidence: high
+  - pattern:
+      name: Algolia Admin Key
+      regex: '(?i)(?:algolia).{0,40}\b([a-f0-9]{32})\b'
+      confidence: low
